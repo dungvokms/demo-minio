@@ -15,7 +15,7 @@ public class AppConfig {
     @Value("${app.minio.host}")
     private String minioHost;
 
-    @Value("${app.ninio.accessKey}")
+    @Value("${app.minio.accessKey}")
     private String minioAccessKey;
 
     @Value("${app.minio.secretKey}")
