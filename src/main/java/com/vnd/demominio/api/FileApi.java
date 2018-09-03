@@ -52,7 +52,11 @@ public class FileApi {
                            @RequestParam("objectName") String objectName,
                            @RequestParam("file") MultipartFile file) throws IOException, InvalidKeyException,
             NoSuchAlgorithmException, InsufficientDataException, InvalidArgumentException, InternalException,
-            NoResponseException, InvalidBucketNameException, XmlPullParserException, ErrorResponseException {
+            NoResponseException, InvalidBucketNameException, XmlPullParserException, ErrorResponseException, RegionConflictException {
+
+        if (!minioClient.bucketExists(bucketName)) {
+            minioClient.makeBucket(bucketName);
+        }
 
         minioClient.putObject(bucketName, objectName, file.getInputStream(), file.getContentType());
     }
